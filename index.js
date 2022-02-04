@@ -1,3 +1,6 @@
+
+
+
 let getCategories = () => {
   fetch("https://striveschool-api.herokuapp.com/api/movies/", {
     method: "GET",
@@ -82,7 +85,7 @@ let getCategories = () => {
             console.log(results)
             
             let allMovies = results.reduce(reducer, [])
-
+            
             console.log(allMovies);
             displayMovies(allMovies);
         }   
@@ -100,16 +103,49 @@ console.log(arr)
         newCol.className =
           "col text-white d-flex flex-column justify-content-between";
         newCol.innerHTML = `
-                                <img src="${movie.imageUrl}" class="img-fluid" alt="...">                                
-                                <div>
-                                    <h5 class="">${movie.name}</h5> 
-                                <p class="">${movie.category}</p>                                  
-                                <a href="#" class="btn btn-dark">Edit</a> 
+                                <img src="${movie.imageUrl}" class="img-fluid movie-url" alt="...">                                
+                                <div class="mt-3">
+                                    <h5 class="movie-name">${movie.name}</h5> 
+                                    <p class="movie-category">${movie.category}</p>                                  
+                                    <p class="d-none movie-description">${movie.description}</p>                                  
+                                    <div id="${movie.imageUrl}" class="image">
+                                        <div id="${movie.name}" class="name">
+                                            <div id="${movie.category}" class="category">
+                                                <div id="${movie.description}" class="description">
+                                                    <a href="edit.html?movieID=${movie._id}" id="${movie._id}" onclick="goToEdit(event)" class="btn btn-dark">Edit</a> 
+                                                </div>
+                                            </div>                                
+                                        </div>
+                                    </div>
                                 </div>                               
                             `;
         allMoviesContainer.appendChild(newCol);
+
     })
 
+}
+
+
+const goToEdit = (e) => {
+    
+        
+    let id = e.target.id;
+    let description = e.target.closest(".description").id
+    let category = e.target.closest(".category").id
+    let name = e.target.closest(".name").id
+    let image = e.target.closest(".image").id
+    
+    console.log(id);
+    console.log(description);
+    console.log(name);
+    console.log(category);
+    console.log(image);
+
+    localStorage.setItem("id ", id);
+    localStorage.setItem("description", description);
+    localStorage.setItem("category", category);
+    localStorage.setItem("name", name);
+    localStorage.setItem("image", image);
 }
 
 

@@ -13,7 +13,7 @@ console.log(endpoint);
 
 if (movieID !== null) {
   try {
-    const loadProductInfo = async () => {
+    const loadMovieInfo = async () => {
       const response = await fetch(endpoint, {
         method: "GET",
         headers: {
@@ -23,20 +23,20 @@ if (movieID !== null) {
       });
       const product = await response.json();
       /* PRE-FILLING UP FORM */
-      document.getElementById("nameValue").value = product.name;
-      document.getElementById("descriptionValue").value = product.description;
-      document.getElementById("brandValue").value = product.brand;
-      document.getElementById("imgUrlValue").value = product.imageUrl;
-      document.getElementById("priceValue").value = product.price;
+      document.getElementById("name").value = localStorage.getItem("name")
+      document.getElementById("description").value =  localStorage.getItem("description");
+      document.getElementById("category").value =   localStorage.getItem("category");
+      document.getElementById("image").value = localStorage.getItem("image");
+     
 
       /* CHANGING BUTTONS, TEXTS ETC.... */
 
-      document.querySelector("#submitBtn").innerText = "Edit Product";
+      document.querySelector("#submitBtn").innerText = "Edit Movie";
       document.querySelector(".btn-danger").classList.remove("d-none");
-      document.querySelector("h3").innerText = "Edit Product Details:";
+      
     };
     window.onload = () => {
-      loadProductInfo();
+      loadMovieInfo();
     };
   } catch (error) {
     console.log(error);
@@ -46,11 +46,10 @@ if (movieID !== null) {
     event.preventDefault();
 
     const myEvent = {
-      name: document.getElementById("nameValue").value,
-      description: document.getElementById("descriptionValue").value,
-      brand: document.getElementById("brandValue").value,
-      imageUrl: document.getElementById("imgUrlValue").value,
-      price: document.getElementById("priceValue").value,
+      name: document.getElementById("name").value,
+      description: document.getElementById("description").value,
+      category: document.getElementById("category").value,
+      imageUrl: document.getElementById("image").value,
     };
 
     try {
