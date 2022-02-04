@@ -122,7 +122,7 @@ console.log(arr)
         allMoviesContainer.appendChild(newCol);
 
     })
-
+    showLoading(false)
 }
 
 
@@ -149,9 +149,16 @@ const goToEdit = (e) => {
 }
 
 
+const showLoading = (isloading) => {
+  const spinner = document.getElementById("spinner");
+  if (isloading) spinner.classList.remove("d-none");
+  else spinner.classList.add("d-none");
+};
+
 
 window.onload = () => {
     getCategories();
+    showLoading(true);
     
 }
 

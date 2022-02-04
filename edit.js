@@ -126,6 +126,8 @@ if (movieID !== null) {
       console.log("POST Successful", message);
       
       document.getElementById("form").reset();
+      document.getElementById("alert-upload-completed").classList.remove("d-none")
+      document.getElementById("form-container").classList.add("d-none")
 
       
     } catch (error) {
